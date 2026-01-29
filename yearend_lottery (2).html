@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapidtek 2024 尾牙抽獎 | NEON TEN WIN AGAIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff2d95;
+            --neon-blue: #00f3ff;
+            --neon-purple: #b84dff;
+            --neon-yellow: #fff700;
+            --neon-green: #39ff14;
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(20, 20, 35, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--dark-bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--neon-pink);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--neon-blue);
+            top: 50%;
+            right: 10%;
+            animation-delay: -2s;
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--neon-purple);
+            bottom: 20%;
+            left: 30%;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.5));
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            from { filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 40px rgba(255, 45, 149, 0.7)); }
+        }
+
+        .logo-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 12px;
+            color: var(--neon-blue);
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* Slogan */
+        .slogan {
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .slogan-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .slogan-text .neon {
+            color: #fff;
+            text-shadow:
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--neon-pink),
+                0 0 40px var(--neon-pink),
+                0 0 60px var(--neon-pink),
+                0 0 80px var(--neon-pink);
+            animation: neonFlicker 1.5s infinite alternate;
+        }
+
+        .slogan-text .ten {
+            color: #fff;
+            text-shadow:
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--neon-yellow),
+                0 0 40px var(--neon-yellow),
+                0 0 60px var(--neon-yellow);
+            animation: neonFlicker 1.8s infinite alternate;
+            animation-delay: 0.3s;
+        }
+
+        .slogan-text .win {
+            color: #fff;
+            text-shadow:
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--neon-green),
+                0 0 40px var(--neon-green),
+                0 0 60px var(--neon-green);
+            animation: neonFlicker 2s infinite alternate;
+            animation-delay: 0.6s;
+        }
+
+        .slogan-text .again {
+            color: #fff;
+            text-shadow:
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--neon-blue),
+                0 0 40px var(--neon-blue),
+                0 0 60px var(--neon-blue);
+            animation: neonFlicker 1.6s infinite alternate;
+            animation-delay: 0.9s;
+        }
+
+        @keyframes neonFlicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0.8;
+            }
+        }
+
+        .year-badge {
+            display: inline-block;
+            padding: 10px 40px;
+            margin-top: 20px;
+            border: 2px solid var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+            box-shadow: 
+                0 0 10px var(--neon-pink),
+                inset 0 0 10px rgba(255, 45, 149, 0.1);
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            from { box-shadow: 0 0 10px var(--neon-pink), inset 0 0 10px rgba(255, 45, 149, 0.1); }
+            to { box-shadow: 0 0 25px var(--neon-pink), inset 0 0 20px rgba(255, 45, 149, 0.2); }
+        }
+
+        /* Announcement Card */
+        .announcement-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 30px rgba(0, 243, 255, 0.1),
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .announcement-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .announcement-content {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .highlight {
+            color: var(--neon-yellow);
+            font-weight: 700;
+            text-shadow: 0 0 8px var(--neon-yellow);
+        }
+
+        .notice-list {
+            margin: 25px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .notice-list li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .notice-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+            animation: starPulse 1.5s ease-in-out infinite;
+        }
+
+        .notice-list li:nth-child(2)::before { animation-delay: 0.2s; }
+        .notice-list li:nth-child(3)::before { animation-delay: 0.4s; }
+        .notice-list li:nth-child(4)::before { animation-delay: 0.6s; }
+
+        @keyframes starPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        .closing-message {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(255, 45, 149, 0.1), rgba(0, 243, 255, 0.1));
+            border-radius: 15px;
+            border-left: 4px solid var(--neon-pink);
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .blessing {
+            margin-top: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* Lottery Table */
+        .lottery-section {
+            margin-top: 50px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 
+                0 0 10px var(--neon-blue),
+                0 0 20px var(--neon-blue);
+        }
+
+        .lottery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-flow: column;
+            grid-template-rows: repeat(18, auto);
+            gap: 12px 15px;
+        }
+
+        @media (max-width: 1200px) {
+            .lottery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(24, auto);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .lottery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(36, auto);
+            }
+        }
+
+        .lottery-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 12px 18px;
+            transition: all 0.3s ease;
+        }
+
+        .lottery-item:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--neon-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+        }
+
+        .lottery-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--neon-pink);
+            text-shadow: 0 0 8px var(--neon-pink);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .lottery-name {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+            font-size: 1rem;
+        }
+
+        .name-cn {
+            color: #fff;
+        }
+
+        .name-en {
+            color: var(--neon-blue);
+            font-weight: 300;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            letter-spacing: 5px;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Sparkle Effects */
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkle 3s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: translateY(0) scale(0); }
+            50% { opacity: 1; transform: translateY(-50px) scale(1); }
+            100% { opacity: 0; transform: translateY(-100px) scale(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo { font-size: 2rem; letter-spacing: 4px; }
+            .slogan-text { font-size: 2rem; letter-spacing: 2px; }
+            .year-badge { font-size: 1rem; padding: 8px 25px; }
+            .announcement-card { padding: 25px; }
+            .lottery-grid { 
+                grid-template-columns: 1fr;
+                grid-template-rows: none;
+                grid-auto-flow: row;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo">RAPIDTEK</div>
+                <div class="logo-subtitle">鐳洋科技股份有限公司</div>
+            </div>
+            
+            <div class="slogan">
+                <div class="slogan-text">
+                    <span class="neon">NEON</span> 
+                    <span class="ten">TEN</span> 
+                    <span class="win">WIN</span> 
+                    <span class="again">AGAIN</span>
+                </div>
+            </div>
+            
+            <div class="year-badge">2026 年終尾牙</div>
+        </header>
+
+        <!-- Announcement -->
+        <div class="announcement-card">
+            <h2 class="announcement-title">🎊 尾牙抽獎公告 🎊</h2>
+            <div class="announcement-content">
+                <p>Dear Rapidtek 全體同仁：</p>
+                <p style="margin-top: 20px;">
+                    感謝大家這一年來的<span class="highlight">辛勤付出</span>與<span class="highlight">共同努力</span>，本公司年度尾牙活動即將歡樂登場！為確保活動進行順利，福委會特此公告本次尾牙抽獎號碼名單。
+                </p>
+                
+                <p style="margin-top: 25px; font-weight: 700; color: var(--neon-blue);">請同仁務必留意以下事項：</p>
+                <ul class="notice-list">
+                    <li>此為各位同仁的<span class="highlight">抽獎對應號碼</span>，請務必留存。</li>
+                    <li>抽獎時<span class="highlight">本人需在場</span>，始有領獎資格。</li>
+                    <li>若對抽獎號碼有任何疑問，請於活動前儘速與福委會聯繫。</li>
+                    <li>此內容同步更新於 Teams「<span class="highlight">鐳洋職工福利委員會-公告</span>」頻道中。</li>
+                </ul>
+
+                <div class="closing-message">
+                    ✨ 精彩好禮、驚喜連連！期待在尾牙當天與各位一同共享歡樂時光，為這一年畫下最熱鬧、最圓滿的句點！
+                    <div class="blessing">祝 工作順利，尾牙中獎！🎰</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lottery List -->
+        <div class="lottery-section">
+            <h2 class="section-title">🎰 抽獎號碼名單 🎰</h2>
+            <div class="lottery-grid" id="lotteryGrid">
+                <!-- Items will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-logo">RAPIDTEK</div>
+            <div class="footer-text">鐳洋科技股份有限公司 職工福利委員會</div>
+        </footer>
+    </div>
+
+    <script>
+        // Lottery data
+        const lotteryData = [
+            { num: 1, cn: "朱良", en: "Ryan" },
+            { num: 2, cn: "徐瑋揚", en: "Wade" },
+            { num: 3, cn: "賴素如", en: "Ruru" },
+            { num: 4, cn: "林亭均", en: "Celia" },
+            { num: 5, cn: "李岳霖", en: "Melo" },
+            { num: 6, cn: "林家安", en: "Miko" },
+            { num: 7, cn: "陳雋", en: "Eddie" },
+            { num: 8, cn: "王齡萱", en: "Ling" },
+            { num: 9, cn: "李孟慈", en: "Claire" },
+            { num: 10, cn: "蔡佳倫", en: "Carol" },
+            { num: 11, cn: "禇文彬", en: "Rex" },
+            { num: 12, cn: "楊裕仁", en: "Edward" },
+            { num: 13, cn: "張雯媜", en: "Vivian" },
+            { num: 14, cn: "林柏川", en: "Frank" },
+            { num: 15, cn: "黃昭容", en: "Fiona" },
+            { num: 16, cn: "陳純雅", en: "Lucy" },
+            { num: 17, cn: "彭俊凱", en: "Kai" },
+            { num: 18, cn: "許庭瑜", en: "Winnie" },
+            { num: 19, cn: "吳崧哲", en: "Andy" },
+            { num: 20, cn: "王奇霖", en: "Kirin" },
+            { num: 21, cn: "林致宏", en: "Ben" },
+            { num: 22, cn: "郭致宏", en: "Bryant" },
+            { num: 23, cn: "袁登周", en: "Frank" },
+            { num: 24, cn: "吳奕葳", en: "Wes" },
+            { num: 25, cn: "陳游勳", en: "Jimmy" },
+            { num: 26, cn: "詹人靜", en: "Zoe" },
+            { num: 27, cn: "廖婕妤", en: "Ruby" },
+            { num: 28, cn: "葉松錞", en: "Ken" },
+            { num: 29, cn: "張廷耀", en: "Ice" },
+            { num: 30, cn: "郭紘志", en: "Jimmy" },
+            { num: 31, cn: "蘇育立", en: "Ali" },
+            { num: 32, cn: "蔣智中", en: "Alex" },
+            { num: 33, cn: "許劭薇", en: "Kate" },
+            { num: 34, cn: "許庭瑄", en: "Elsa" },
+            { num: 35, cn: "李冠賢", en: "Sean" },
+            { num: 36, cn: "賴怡雯", en: "Winny" },
+            { num: 37, cn: "胡文修", en: "Matthew" },
+            { num: 38, cn: "曾薇宸", en: "Vivian" },
+            { num: 39, cn: "白國威", en: "Kuowei" },
+            { num: 40, cn: "蔡靖晨", en: "Ansley" },
+            { num: 41, cn: "梁菱虹", en: "May" },
+            { num: 42, cn: "楊慧文", en: "Vera" },
+            { num: 43, cn: "蘇柏妮", en: "Bernice" },
+            { num: 44, cn: "陳靖瑋", en: "Jerry" },
+            { num: 45, cn: "郭儀君", en: "Yarissa" },
+            { num: 46, cn: "廖于汶", en: "Ruru" },
+            { num: 47, cn: "陳宗佑", en: "Jack" },
+            { num: 48, cn: "游文華", en: "Robert" },
+            { num: 49, cn: "陳觀豪", en: "Kody" },
+            { num: 50, cn: "宋旻潔", en: "Stacey" },
+            { num: 51, cn: "黃恩佑", en: "Alex" },
+            { num: 52, cn: "許玹銘", en: "Henry" },
+            { num: 53, cn: "葉莉涵", en: "Vicky" },
+            { num: 54, cn: "林晉丞", en: "Chris" },
+            { num: 55, cn: "林菫瑄", en: "Molly" },
+            { num: 56, cn: "陳孟揚", en: "Jason" },
+            { num: 57, cn: "蘇玲郁", en: "Lilyah" },
+            { num: 58, cn: "李文基", en: "Vincent" },
+            { num: 59, cn: "鄭琮仁", en: "Prince" },
+            { num: 60, cn: "陳秀欣", en: "Cathy" },
+            { num: 61, cn: "林翰蕙", en: "Dora" },
+            { num: 62, cn: "王臣木", en: "CM" },
+            { num: 63, cn: "李柔施", en: "Silvia" },
+            { num: 64, cn: "黃詩宸", en: "Dianne" },
+            { num: 65, cn: "陳聖樺", en: "Levi" },
+            { num: 66, cn: "郭于萱", en: "Beryl" },
+            { num: 67, cn: "詹詠焱", en: "Daphne" },
+            { num: 68, cn: "薛郁樺", en: "Louis" },
+            { num: 69, cn: "李俊賢", en: "Jim" },
+            { num: 70, cn: "鄧柏晟", en: "Benson" },
+            { num: 71, cn: "葉馥綾", en: "Cara Yeh" }
+        ];
+
+        // Populate lottery grid
+        const grid = document.getElementById('lotteryGrid');
+        lotteryData.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'lottery-item';
+            div.style.animationDelay = `${index * 0.02}s`;
+            div.innerHTML = `
+                <div class="lottery-number">${String(item.num).padStart(2, '0')}</div>
+                <div class="lottery-name">
+                    <span class="name-cn">${item.cn}</span>
+                    <span class="name-en">${item.en}</span>
+                </div>
+            `;
+            grid.appendChild(div);
+        });
+
+        // Create sparkle effects
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            sparkle.style.animationDuration = (2 + Math.random() * 2) + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 4000);
+        }
+
+        // Generate sparkles periodically
+        setInterval(createSparkle, 300);
+    </script>
+</body>
+</html>
